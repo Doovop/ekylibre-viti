@@ -1,0 +1,44 @@
+= content_for :heading do
+  %h1
+    = t('.title')
+    %span.period= l(@drm.period, format: :month_year)
+
+.panel
+  .header
+    %h3= t('.details')
+    .state{class: @drm.state}
+      = t("enumerize.drm.state.#{@drm.state}")
+
+  .content
+    .row
+      .col
+        %h4= t('.producer')
+        %p= @drm.producer.name
+
+    .row
+      .col
+        %h4= t('.stock_summary')
+        %table.table
+          %thead
+            %tr
+              %th= t('.product')
+              %th= t('.initial_stock')
+              %th= t('.entries')
+              %th= t('.exits')
+              %th= t('.final_stock')
+          %tbody
+            - @drm.stock_movements.group_by(&:product).each do |product, movements|
+              %tr
+                %td= product.name
+                %td= movements.first.initial_quantity
+                %td= movements.entries.sum(:quantity)
+                %td= movements.exits.sum(:quantity)
+                %td= movements.final_quantity
+
+  .actions
+    - if @drm.draft?
+      = link_to t('actions.edit'), edit_drm_path(@drm), class: 'button'
+      = link_to t('actions.validate'), validate_drm_path(@drm), method: :post, class: 'primary-button'
+    - if @drm.validated?
+      = link_to t('actions.submit'), submit_drm_path(@drm), method: :post, class: 'primary-button'
+    = link_to t('actions.download_pdf'), drm_path(@drm, format: :pdf), class: 'button'

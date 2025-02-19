@@ -1,0 +1,25 @@
+= content_for :heading do
+  %h1= t('.title')
+  = link_to t('.new'), new_drm_path, class: 'primary-button'
+
+.panel
+  %table.table
+    %thead
+      %tr
+        %th= t('.period')
+        %th= t('.producer')
+        %th= t('.state')
+        %th= t('.actions')
+    %tbody
+      - @drms.each do |drm|
+        %tr
+          %td= l(drm.period, format: :month_year)
+          %td= drm.producer.name
+          %td= t("enumerize.drm.state.#{drm.state}")
+          %td.actions
+            = link_to t('actions.show'), drm_path(drm)
+            - if drm.draft?
+              = link_to t('actions.edit'), edit_drm_path(drm)
+              = link_to t('actions.validate'), validate_drm_path(drm), method: :post
+            - if drm.validated?
+              = link_to t('actions.submit'), submit_drm_path(drm), method: :post

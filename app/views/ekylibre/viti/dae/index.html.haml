@@ -1,0 +1,29 @@
+= content_for :heading do
+  %h1= t('.title')
+  = link_to t('.new'), new_dae_path, class: 'primary-button'
+
+.panel
+  %table.table
+    %thead
+      %tr
+        %th= t('.reference')
+        %th= t('.transport_date')
+        %th= t('.sender')
+        %th= t('.recipient')
+        %th= t('.state')
+        %th= t('.emcs_reference')
+        %th= t('.actions')
+    %tbody
+      - @daes.each do |dae|
+        %tr
+          %td= dae.reference_number
+          %td= l(dae.transport_date)
+          %td= dae.sender.name
+          %td= dae.recipient.name
+          %td= t("enumerize.dae.state.#{dae.state}")
+          %td= dae.emcs_reference
+          %td.actions
+            = link_to t('actions.show'), dae_path(dae)
+            - if dae.draft?
+              = link_to t('actions.edit'), edit_dae_path(dae)
+              = link_to t('actions.validate'), validate_dae_path(dae), method: :post

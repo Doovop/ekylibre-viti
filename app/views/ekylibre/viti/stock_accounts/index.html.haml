@@ -1,0 +1,27 @@
+= content_for :heading do
+  %h1= t('.title')
+
+.panel
+  .filters
+    = simple_form_for :filters, method: :get do |f|
+      = f.input :product_id, collection: Product.all, include_blank: true
+      = f.submit t('actions.filter')
+
+  %table.table
+    %thead
+      %tr
+        %th= t('.product')
+        %th= t('.current_stock')
+        %th= t('.unit')
+        %th= t('.last_movement')
+        %th= t('.actions')
+    %tbody
+      - @stock_accounts.each do |account|
+        %tr
+          %td= account.product.name
+          %td= account.current_balance
+          %td= account.unit
+          %td= l(account.movements.last&.moved_at)
+          %td
+            = link_to t('actions.show'), stock_account_path(account)
+            = link_to t('actions.movements'), movements_stock_account_path(account)

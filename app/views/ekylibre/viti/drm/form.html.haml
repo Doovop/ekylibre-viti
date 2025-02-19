@@ -1,0 +1,22 @@
+= simple_form_for @drm do |f|
+  .panel
+    .header
+      %h3= t('.details')
+
+    .content
+      = f.input :campaign_id, collection: Campaign.all
+      = f.input :producer_id, collection: Entity.of_type(:organization)
+      = f.input :period, as: :date, html5: true
+
+      %h4= t('.stock_movements')
+      #stock-movements
+        = f.simple_fields_for :stock_movements do |movement|
+          = render 'stock_movement_fields', f: movement
+        .links
+          = link_to_add_association t('.add_movement'), f, :stock_movements
+
+      = f.input :notes
+
+    .actions
+      = f.submit t('actions.save'), class: 'primary-button'
+      = link_to t('actions.cancel'), drm_index_path, class: 'button'

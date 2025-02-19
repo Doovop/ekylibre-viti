@@ -1,0 +1,27 @@
+= content_for :heading do
+  %h1= t('.title')
+  = link_to t('.new'), new_dsa_path, class: 'primary-button'
+
+.panel
+  %table.table
+    %thead
+      %tr
+        %th= t('.reference')
+        %th= t('.transport_date')
+        %th= t('.sender')
+        %th= t('.recipient')
+        %th= t('.state')
+        %th= t('.actions')
+    %tbody
+      - @dsas.each do |dsa|
+        %tr
+          %td= dsa.reference_number
+          %td= l(dsa.transport_date)
+          %td= dsa.sender.name
+          %td= dsa.recipient.name
+          %td= t("enumerize.dsa.state.#{dsa.state}")
+          %td.actions
+            = link_to t('actions.show'), dsa_path(dsa)
+            - if dsa.draft?
+              = link_to t('actions.edit'), edit_dsa_path(dsa)
+              = link_to t('actions.validate'), validate_dsa_path(dsa), method: :post
