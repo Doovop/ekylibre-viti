@@ -1,0 +1,85 @@
+fra:
+  ekylibre:
+    viti:
+      drm:
+        index:
+          title: "Déclarations Récapitulatives Mensuelles"
+          new: "Nouvelle DRM"
+          period: "Période"
+          producer: "Producteur"
+          state: "État"
+          actions: "Actions"
+        show:
+          title: "DRM"
+          details: "Détails"
+          producer: "Producteur"
+          stock_summary: "Récapitulatif des stocks"
+          product: "Produit"
+          initial_stock: "Stock initial"
+          entries: "Entrées"
+          exits: "Sorties"
+          final_stock: "Stock final"
+        form:
+          details: "Détails de la DRM"
+          stock_movements: "Mouvements de stock"
+          add_movement: "Ajouter un mouvement"
+      dsa:
+        index:
+          title: "Documents Simplifiés d'Accompagnement"
+          new: "Nouveau DSA"
+          reference: "Référence"
+          transport_date: "Date de transport"
+          sender: "Expéditeur"
+          recipient: "Destinataire"
+          state: "État"
+          actions: "Actions"
+      dae:
+        index:
+          title: "Documents Administratifs Électroniques"
+          new: "Nouveau DAE"
+          reference: "Référence"
+          transport_date: "Date de transport"
+          sender: "Expéditeur"
+          recipient: "Destinataire"
+          state: "État"
+          emcs_reference: "Référence EMCS"
+          actions: "Actions"
+      stock_accounts:
+        index:
+          title: "Comptabilité matière"
+          product: "Produit"
+          current_stock: "Stock actuel"
+          unit: "Unité"
+          last_movement: "Dernier mouvement"
+          actions: "Actions"
+      
+      enumerize:
+        drm:
+          state:
+            draft: "Brouillon"
+            validated: "Validée"
+            submitted: "Transmise"
+        dsa:
+          state:
+            draft: "Brouillon"
+            validated: "Validé"
+            in_transit: "En transit"
+            delivered: "Livré"
+        dae:
+          state:
+            draft: "Brouillon"
+            validated: "Validé"
+            submitted: "Transmis"
+            accepted: "Accepté"
+            rejected: "Rejeté"
+      
+      actions:
+        show: "Voir"
+        edit: "Modifier"
+        validate: "Valider"
+        submit: "Transmettre"
+        cancel: "Annuler"
+        save: "Enregistrer"
+        download_pdf: "Télécharger PDF"
+        filter: "Filtrer"
+        movements: "Mouvements"
